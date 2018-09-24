@@ -70,8 +70,8 @@ declared).
   * line 15: `a` -> line 2, `b` -> line 3
 
   The compiler would produce a static semantic error because the
-  occurrence of `a` on line 5 refers to the declaration on line `12`
-  in the same block. Thus `a` on line `12` is used before its
+  occurrence of `a` on line 5 refers to the declaration on line 10
+  in the same block. Thus `a` on line 12 is used before its
   declaration, which is not allowed.
 
 ## Problem 2 (4 Points)
@@ -187,31 +187,31 @@ Consider the following fragment of code in C:
 
 ### Solution
 
-* We assume that the shown variables are the only variables that are
-  declared in the code. It follows from `C`'s static scoping rules
-  that there are at most 6 variables in scope at any time during
-  execution of the code. Hence, 24 bytes are sufficient to store these
-  variables.
+1. We assume that the shown variables are the only variables that are
+   declared in the code. It follows from `C`'s static scoping rules
+   that there are at most 6 variables in scope at any time during
+   execution of the code. Hence, 24 bytes are sufficient to store these
+   variables.
 
-* Without loss of generality, we assume that variable declarations
-  only appear at the beginning of a block before any other nested
-  blocks or statements. The algorithm could work as follows: we store
-  in `offset` the next offset for available free space in the stack
-  frame.  We initialize `offset` to 0. Blocks in the function body are
-  processed recursively starting with the outermost block. When
-  entering a block we first process all variables declared in the
-  block in order of appearance. For each variable declaration of a
-  variable `x`, we associate the current value of `offset` with this
-  declaration of `x` and then increment `offset` by the size of `x`'s
-  type (e.g. 4 bytes for an `int`). After processing all declarations,
-  we recursively process all subblocks of the current block in the
-  order in which they appear in the code. After processing an
-  individual subblock, we always set `offset` back to the value it had
-  before that subblock was entered. To determine the offset needed to
-  implement a memory access to the stack frame for an individual
-  occurrence of a variable `x` in the function body, we simply
-  determine the declaration of `x` that is in the static scope at that
-  point and use the offset calculated for that declaration.
+2. Without loss of generality, we assume that variable declarations
+   only appear at the beginning of a block before any other nested
+   blocks or statements. The algorithm could work as follows: we store
+   in `offset` the next offset for available free space in the stack
+   frame.  We initialize `offset` to 0. Blocks in the function body
+   are processed recursively starting with the outermost block. When
+   entering a block we first process all variables declared in the
+   block in order of appearance. For each variable declaration of a
+   variable `x`, we associate the current value of `offset` with this
+   declaration of `x` and then increment `offset` by the size of `x`'s
+   type (e.g. 4 bytes for an `int`). After processing all
+   declarations, we recursively process all subblocks of the current
+   block in the order in which they appear in the code. After
+   processing an individual subblock, we always set `offset` back to
+   the value it had before that subblock was entered. To determine the
+   offset needed to implement a memory access to the stack frame for
+   an individual occurrence of a variable `x` in the function body, we
+   simply determine the declaration of `x` that is in the static scope
+   at that point and use the offset calculated for that declaration.
 
 
 ## Problem 4 (6 Points)
