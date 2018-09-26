@@ -65,7 +65,7 @@ declared).
   executed printing `1` and `2`.
   
 * C# rules: in this case, the variables are bound as follows:
-  * line 7: `a` -> line 10, `b` -> line 5
+  * line 7: `a` -> line 8, `b` -> line 5
   * line 12: `a` -> line 10, `b` -> line 5
   * line 15: `a` -> line 2, `b` -> line 3
 
