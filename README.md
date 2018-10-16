@@ -71,8 +71,8 @@ declared).
 
   The compiler would produce a static semantic error because the
   occurrence of `a` on line 5 refers to the declaration on line 10
-  in the same block. Thus `a` on line 12 is used before its
-  declaration, which is not allowed.
+  in the same block. Thus `a` on line 5 is used before its
+  declaration, which is not allowed. A similar violation is on line 7.
 
 ## Problem 2 (4 Points)
 
